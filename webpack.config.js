@@ -7,7 +7,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 // const VENDOR_LIBS = Object.keys(dependencies);
 
 const VENDOR_LIBS = [
-  'react','faker', 'lodash', 'redux', 'react-redux', 'react-dom', 'react-input-range', 'redux-form', 'redux-thunk', 'react-router'
+  'react','faker', 'lodash', 'redux', 'react-redux', 'react-dom', 'react-input-range', 'redux-form', 'redux-thunk', 'react-router', 'babel-polyfill'
 ]
 
 module.exports = {

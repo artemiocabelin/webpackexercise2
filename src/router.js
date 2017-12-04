@@ -1,20 +1,23 @@
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
+import asyncComponent from "./components/asyncComponent";
 import Home from './components/Home';
 import ArtistMain from './components/artists/ArtistMain';
-import ArtistDetail from './components/artists/ArtistDetail';
-import ArtistCreate from './components/artists/ArtistCreate';
-import ArtistEdit from './components/artists/ArtistEdit';
 
-const Routes = () => {
+const AsyncArtistDetail = asyncComponent(() => import("./components/artists/ArtistDetail"));
+const AsyncArtistCreate = asyncComponent(() => import("./components/artists/ArtistCreate"));
+const AsyncArtistEdit = asyncComponent(() => import("./components/artists/ArtistEdit"));
+
+
+const Routes = ({childProps}) => {
   return (
-    <Router history={hashHistory}>
+    <Router history={hashHistory} >
       <Route path="/" component={Home}>
         <IndexRoute component={ArtistMain} />
-        <Route path="artists/new" component={ArtistCreate} />
-        <Route path="artists/:id" component={ArtistDetail} />
-        <Route path="artists/:id/edit" component={ArtistEdit} />
+        <Route path="artists/new" exact component={AsyncArtistCreate} props={childProps} />
+        <Route path="artists/:id" exact component={AsyncArtistDetail} props={childProps} />
+        <Route path="artists/:id/edit" exact component={AsyncArtistEdit} props={childProps} />
       </Route>
     </Router>
   );
